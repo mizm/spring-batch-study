@@ -1,0 +1,51 @@
+2021-05-21 16:51:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE PAY (
+  ID         BIGINT NOT NULL AUTO_INCREMENT,
+  AMOUNT     BIGINT,
+  TX_NAME     VARCHAR(255),
+  TX_DATE_TIME DATETIME,
+  PRIMARY KEY (ID)
+)
+
+INSERT[*] INTO PAY (AMOUNT, TX_NAME, TX_DATE_TIME) VALUES (1000, 'trade1', '2018-09-10 00:00:00')"; SQL statement:
+create table pay (
+  id         bigint not null auto_increment,
+  amount     bigint,
+  tx_name     varchar(255),
+  tx_date_time datetime,
+  primary key (id)
+)
+
+insert into pay (amount, tx_name, tx_date_time) VALUES (1000, 'trade1', '2018-09-10 00:00:00') [42000-200]
+2021-05-21 16:51:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PAY" not found; SQL statement:
+insert into pay (amount, tx_name, tx_date_time) VALUES (2000, 'trade2', '2018-09-10 00:00:00') [42102-200]
+2021-05-21 16:51:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PAY" not found; SQL statement:
+insert into pay (amount, tx_name, tx_date_time) VALUES (3000, 'trade3', '2018-09-10 00:00:00') [42102-200]
+2021-05-21 16:51:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PAY" not found; SQL statement:
+insert into pay (amount, tx_name, tx_date_time) VALUES (4000, 'trade4', '2018-09-10 00:00:00') [42102-200]
+2021-05-21 16:51:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE PAY (
+  ID         BIGINT NOT NULL AUTO_INCREMENT,
+  AMOUNT     BIGINT,
+  TX_NAME     VARCHAR(255),
+  TX_DATE_TIME DATETIME,
+  PRIMARY KEY (ID)
+)
+
+
+
+INSERT[*] INTO PAY (AMOUNT, TX_NAME, TX_DATE_TIME) VALUES (1000, 'trade1', '2018-09-10 00:00:00')"; SQL statement:
+create table pay (
+  id         bigint not null auto_increment,
+  amount     bigint,
+  tx_name     varchar(255),
+  tx_date_time datetime,
+  primary key (id)
+)
+
+
+
+insert into pay (amount, tx_name, tx_date_time) VALUES (1000, 'trade1', '2018-09-10 00:00:00') [42000-200]
