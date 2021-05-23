@@ -15,6 +15,7 @@ import org.springframework.batch.item.database.PagingQueryProvider;
 import org.springframework.batch.item.database.builder.JdbcPagingItemReaderBuilder;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -34,6 +35,7 @@ public class JpaPagingItemReaderJobConfiguration {
     private static final int chunkSize = 10;
 
     @Bean
+    @Qualifier("jpaPagingItemReaderJob")
     public Job jpaPagingItemReaderJob() throws Exception {
         return jobBuilderFactory.get("jpaPagingItemReaderJob")
                 .start(jpaPagingItemReaderStep())

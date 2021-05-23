@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: local
+  batch:
+    job:
+      names: ${job.name:NONE}
+logging.level.org.springframework.batch: DEBUG
+---
+spring:
+  profiles: local
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/batch
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+
+---
+spring:
+  profiles: h2
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/batch
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
