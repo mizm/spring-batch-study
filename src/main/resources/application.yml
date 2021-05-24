@@ -4,6 +4,7 @@ spring:
   batch:
     job:
       names: ${job.name:NONE}
+
 logging.level.org.springframework.batch: DEBUG
 ---
 spring:
@@ -24,3 +25,6 @@ spring:
       username: sa
       password:
       driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update

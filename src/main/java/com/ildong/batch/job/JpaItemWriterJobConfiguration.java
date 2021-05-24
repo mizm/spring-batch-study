@@ -53,7 +53,7 @@ public class JpaItemWriterJobConfiguration {
                 .name("jpaItemWriterReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(chunkSize)
-                .queryString("SELECT p FROM Pay p")
+                .queryString("SELECT p FROM Pay p where amount > 9000")
                 .build();
     }
 
