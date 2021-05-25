@@ -1,6 +1,7 @@
 package com.ildong.batch.job;
 
 import com.ildong.batch.config.TestBatchConfig;
+import com.ildong.batch.config.TestJpaBatchConfig;
 import com.ildong.batch.model.Pay;
 import com.ildong.batch.model.Pay2;
 import com.ildong.batch.repository.Pay2Repository;
@@ -26,7 +27,8 @@ import static org.springframework.batch.core.BatchStatus.COMPLETED;
 
 @SpringBatchTest
 @ActiveProfiles("h2")
-@SpringBootTest(classes = {TestBatchConfig.class, JpaItemWriterJobConfiguration.class})
+@SpringBootTest(classes = {TestJpaBatchConfig.class, JpaItemWriterJobConfiguration.class})
+//@DataJpaTest(excludeAutoConfiguration = {TestBatchConfig.class,JpaItemWriterJobConfiguration.class})
 class JpaItemWriterJobConfigurationTest {
 
     @Autowired
