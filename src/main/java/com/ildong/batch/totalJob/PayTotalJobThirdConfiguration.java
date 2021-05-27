@@ -74,7 +74,7 @@ public class PayTotalJobThirdConfiguration {
         return list -> {
             for(Pay pay : list) {
                 log.info("Current = {}", pay);
-                dataShareBean.addDate("totalAmount", pay.getAmount());
+                dataShareBean.addData("totalAmount", pay.getAmount());
             }
         };
     }

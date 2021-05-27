@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @Slf4j
-public class DataShareBean <T extends Long> {
+public class DataShareBean <T> {
 
     private Map<String, T> shareDataMap;
 
@@ -36,7 +36,7 @@ public class DataShareBean <T extends Long> {
         return shareDataMap.get(key);
     }
 
-    public void addDate(String key, T data) {
+    public void addData(String key, T data) {
         if(shareDataMap == null) {
             log.debug("map is not initialize");
             return;
