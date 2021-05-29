@@ -52,10 +52,7 @@ class PayTotalJobSecondConfigurationTest {
 
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
 
-        List<Pay> forTest = payRepository.findForTest(requestDate);
-        long sum = forTest.stream()
-                .mapToLong(p -> p.getAmount())
-                .sum();
+        Long sum = payRepository.findForTest(requestDate);
         TotalPay totalPay = totalPayRepository.findForTest(requestDate).get();
 
         Assertions.assertThat(sum).isEqualTo(totalPay.getSum());

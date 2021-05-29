@@ -21,7 +21,7 @@ public class CustomItemReader implements ItemReader<Pay> {
     @Override
     public Pay read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
         Pay pay = null;
-        if(count < 10) {
+        if(count < 100000) {
             int amount = (int) (Math.random() * 1000000);
             int hour = (int) (Math.random() * 100000) % 24;
             int min = (int) (Math.random() * 100000) % 60;

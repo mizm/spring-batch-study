@@ -7,12 +7,14 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 @Slf4j
 public class DataShareBean <T> {
 
     private Map<String, T> shareDataMap;
+    private AtomicLong total = new AtomicLong();
 
     public DataShareBean() {
         this.shareDataMap = new ConcurrentHashMap<>();
@@ -20,7 +22,7 @@ public class DataShareBean <T> {
 
     public void putData(String key, T data) {
         if(shareDataMap == null) {
-            log.debug("map is not initialize");
+            log.info("map is not initialize");
             return;
         }
 
@@ -28,8 +30,8 @@ public class DataShareBean <T> {
     }
 
     public T getData (String key) {
-
         if (shareDataMap == null) {
+            log.info("map is not initialize");
             return null;
         }
 
@@ -37,16 +39,14 @@ public class DataShareBean <T> {
     }
 
     public void addData(String key, T data) {
-        if(shareDataMap == null) {
-            log.debug("map is not initialize");
-            return;
-        }
-        T t = shareDataMap.get(key);
-        if(t == null) {
-            shareDataMap.put(key,data);
-            return;
-        }
+        shareDataMap.compute(key,(k,v) -> (T) Long.valueOf((Long) data + (Long) v));
+    }
 
-        shareDataMap.put(key, (T) Long.valueOf((Long) data + (Long) t));
+    public void addTotal(Long data) {
+        this.total.addAndGet(data);
+    }
+
+    public Long getTotal() {
+        return this.total.get();
     }
 }

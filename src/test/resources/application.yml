@@ -24,5 +24,6 @@ spring:
       username: sa
       password:
       driver-class-name: org.h2.Driver
-  jpa:
-    show-sql: true
+      maximumPoolSize : 22
+#  jpa:
+#    show-sql: true

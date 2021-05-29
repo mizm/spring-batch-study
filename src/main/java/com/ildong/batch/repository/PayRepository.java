@@ -10,6 +10,12 @@ import java.util.List;
 
 public interface PayRepository extends JpaRepository<Pay, Long> {
 
-    @Query("select p from Pay p where to_char(tx_date_time,'yyyy-mm-dd') = :requestDate")
-    List<Pay> findForTest(@Param(value = "requestDate") String requestDate);
+    @Query("select sum(p.amount) from Pay p where to_char(tx_date_time,'yyyy-mm-dd') = :requestDate")
+    Long findForTest(@Param(value = "requestDate") String requestDate);
+
+    @Query("select MAX(p.id) from Pay p where to_char(tx_date_time,'yyyy-mm-dd') = :requestDate")
+    Long findMaxId(@Param(value = "requestDate") String requestDate);
+
+    @Query("select MIN(p.id) from Pay p where to_char(tx_date_time,'yyyy-mm-dd') = :requestDate")
+    Long findMinId(@Param(value = "requestDate") String requestDate);
 }
