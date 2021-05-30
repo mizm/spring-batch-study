@@ -45,7 +45,7 @@ class PayTotalJobPartitionConfigurationTest {
     @Test
     void 실행테스트() throws Exception {
 
-        String requestDate = "2021-05-24";
+        String requestDate = "2021-05-29";
 
         UUID uuid = UUID.randomUUID();
         JobParameters jobParameters = new JobParametersBuilder()

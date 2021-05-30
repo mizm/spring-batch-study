@@ -43,7 +43,7 @@ class PayTotalJobThirdConfigurationTest {
     @Test
     void 실행테스트() throws Exception {
 
-        String requestDate = "2021-05-29";
+        String requestDate = "2021-05-23";
 
         UUID uuid = UUID.randomUUID();
         JobParameters jobParameters = new JobParametersBuilder()

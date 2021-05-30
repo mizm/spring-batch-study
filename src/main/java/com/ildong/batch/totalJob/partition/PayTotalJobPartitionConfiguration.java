@@ -5,10 +5,13 @@ import com.ildong.batch.model.TotalPay;
 import com.ildong.batch.repository.PayRepository;
 import com.ildong.batch.repository.TotalPayRepository;
 import com.ildong.batch.totalJob.DataShareBean;
+import com.ildong.batch.totalJob.listener.TotalJobListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.annotation.BeforeJob;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -24,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import javax.batch.api.listener.JobListener;
 import javax.persistence.EntityManagerFactory;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -70,12 +74,19 @@ public class PayTotalJobPartitionConfiguration {
 
     @Bean(JOB_NAME)
     public Job job() {
-        dataShareBean.putData("totalAmount", 0L);
+        //listener beforeJob으로 변경
+        //dataShareBean.putData("totalAmount", 0L);
         return jobBuilderFactory.get(JOB_NAME)
+                .listener(listener())
                 .start(step1Manager())
                 .next(step2(null))
                 //.preventRestart()
                 .build();
+    }
+
+    @Bean(BEAN_PREFIX + "listener")
+    public JobExecutionListener listener() {
+        return new TotalJobListener(dataShareBean);
     }
 
     @Bean(name = JOB_NAME +"_step1Manager")
