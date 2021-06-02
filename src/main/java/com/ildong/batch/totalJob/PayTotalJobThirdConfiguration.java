@@ -41,6 +41,7 @@ public class PayTotalJobThirdConfiguration {
 
     @Bean(JOB_NAME)
     public Job job() {
+        dataShareBean.putData("totalAmount", 0L);
         return jobBuilderFactory.get(JOB_NAME)
                 .start(step(null))
                 .next(step2(null))

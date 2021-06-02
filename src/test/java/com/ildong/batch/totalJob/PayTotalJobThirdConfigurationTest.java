@@ -16,6 +16,7 @@ import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.util.StopWatch;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +43,7 @@ class PayTotalJobThirdConfigurationTest {
     @Test
     void 실행테스트() throws Exception {
 
-        String requestDate = "2021-05-24";
+        String requestDate = "2021-05-23";
 
         UUID uuid = UUID.randomUUID();
         JobParameters jobParameters = new JobParametersBuilder()
@@ -50,12 +51,13 @@ class PayTotalJobThirdConfigurationTest {
                 .addString("version", uuid.toString())
                 .toJobParameters();
 
+        StopWatch stopWatch = new StopWatch("single");
+        stopWatch.start();
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
+        stopWatch.stop();
+        System.out.println("stopWatch = " + stopWatch.prettyPrint());
+        Long sum = payRepository.findForTest(requestDate);
 
-        List<Pay> forTest = payRepository.findForTest(requestDate);
-        long sum = forTest.stream()
-                .mapToLong(p -> p.getAmount())
-                .sum();
         TotalPay totalPay = totalPayRepository.findForTest(requestDate).get();
 
         Assertions.assertThat(sum).isEqualTo(totalPay.getSum());
